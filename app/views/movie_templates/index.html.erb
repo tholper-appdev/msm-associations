@@ -29,12 +29,17 @@
     <th>
       Description
     </th>
+    
+    <th>
+      Director
+    </th>
 
     <th>
     </th>
   </tr>
 
   <% @movies.each do |movie| %>
+  <% director = Director.find(movie.director_id) %>
   <tr>
     <td>
       <img src="<%= movie.image_url %>" width="80">
@@ -56,6 +61,10 @@
       <%= movie.description %>
     </td>
 
+    <td>
+      <%= director.name %>
+    </td>
+    
     <td>
       <a href="/movies/<%= movie.id %>" class="btn btn-primary">
         Show details

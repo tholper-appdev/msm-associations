@@ -7,6 +7,8 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params.fetch("id_to_display"))
+    
+    @director = Director.find(@movie.director_id)
 
     render("movie_templates/show.html.erb")
   end
