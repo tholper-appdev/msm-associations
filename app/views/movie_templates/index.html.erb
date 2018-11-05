@@ -39,7 +39,8 @@
   </tr>
 
   <% @movies.each do |movie| %>
-  <% director = Director.find(movie.director_id) %>
+  <% director = Director.find_by(id: movie.director_id) %>
+
   <tr>
     <td>
       <img src="<%= movie.image_url %>" width="80">
@@ -62,7 +63,7 @@
     </td>
 
     <td>
-      <%= director.name %>
+      <%= director&.name %>
     </td>
     
     <td>

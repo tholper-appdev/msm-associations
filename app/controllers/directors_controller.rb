@@ -8,6 +8,9 @@ class DirectorsController < ApplicationController
   def show
     @director = Director.find(params.fetch("id_to_display"))
 
+    @movies = Movie.where(:director_id => @director.id)
+    @movie_count = Movie.where(:director_id => @director.id).count
+    
     render("director_templates/show.html.erb")
   end
 
