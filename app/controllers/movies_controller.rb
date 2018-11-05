@@ -9,6 +9,8 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params.fetch("id_to_display"))
     
     @director = Director.find(@movie.director_id)
+    @characters = Character.where(:movie_id => @movie.id)
+    
     
     
     render("movie_templates/show.html.erb")
