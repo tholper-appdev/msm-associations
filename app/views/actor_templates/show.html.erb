@@ -36,6 +36,13 @@
   <dd>
     <img src="<%= @actor.image_url %>" width="320">
   </dd>
+  
+    <dt>
+    Number of films
+  </dt>
+  <dd>
+    <%= @character_count %>
+  </dd>
 
 </dl>
 
@@ -48,3 +55,54 @@
 <a href="/actors">
   Go back
 </a>
+  
+<div class="card mt-3 mb-5">
+  <div class="card-header">
+    Filmography
+  </div>
+  
+  <% @character.each do |character| %>
+  <ul class="list-group">
+      <li class="list-group-item">
+        <a href="/movies/<%= character.movie_id %>">movie name</a>
+        (<%= character.name %>n)
+      </li>
+  </ul>
+  <% end %>
+  <div class="card-header">
+    Add a new character for this actor
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      
+      <form action="/create_character" >
+        <!-- Label and input for title -->
+        <div class="form-group">
+          <label for="name">
+            Name
+          </label>
+
+          <input type="text" id="name" name="name" class="form-control">
+        </div>
+
+        <!-- Label and input for movie_id -->
+        <div class="form-group">
+          <label for="movie_id">
+            Movie
+          </label>
+          
+          <%= select_tag("movie_id", options_from_collection_for_select(Movie.all, :id, :title, @actor.try(:actor_id)), :class => "form-control") %>
+
+       or <a href="/movies/new">add a new movie</a> first
+        </div>
+
+        <input type="hidden" name="actor_id" value="<%= @actor.id %>">
+
+        <button class="btn btn-block btn-outline-secondary">
+          Create character
+        </button>
+      </form>
+    </li>
+  </ul>
+</div>    
+
